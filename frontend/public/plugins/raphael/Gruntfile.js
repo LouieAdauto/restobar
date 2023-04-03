@@ -6,6 +6,17 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        babel: {
+        files: {
+            expand: true,
+            src: ['src/*.es6'],
+            ext: '-compiled.js'
+        },
+        options: {
+            sourceMap: true,
+            presets: ['babel-preset-es2015', '@babel/preset-react']
+        }
+    },
         // Metadata.
         pkg: pkg,
         banner: grunt.file.read("dev/copy.js").replace(/@VERSION/, pkg.version),

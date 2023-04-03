@@ -9,6 +9,9 @@ import ViewBox from "../../components/ViewBox";
 import LoaderHandler from "../../components/loader/LoaderHandler";
 import ModalButton from "../../components/ModalButton";
 import { BigSpin } from "../../components/loader/SvgLoaders";
+//Printer settings and thermal tickets
+import { createReceipt } from "../../components/receipt/createReceipt";
+import {render} from 'react-thermal-printer'
 
 /* constants */
 import { ORDER_UPDATE_RESET } from "../../constants/orderConstants";
@@ -21,7 +24,7 @@ import {
 
 /* Styles */
 import { modalStyles } from "../../utils/styles";
-import Receipt from "../../components/receipt/Receipt";
+
 
 const OrderViewScreen = ({ history, match }) => {
     const orderId = parseInt(match.params.id);
@@ -35,6 +38,7 @@ const OrderViewScreen = ({ history, match }) => {
 
     //order details state
     const orderDetails = useSelector((state) => state.orderDetails);
+    console.log(orderDetails)
     const { loading, error, order } = orderDetails;
 
     //order edit state
@@ -67,11 +71,11 @@ const OrderViewScreen = ({ history, match }) => {
             isOpen={modal}
             onRequestClose={() => setModal(false)}
         >
-            <h2 className="text-center">Order Payment</h2>
-            <p className="text-center">Is order already paid?.</p>
+            <h2 className="text-center">Pago de comanda</h2>
+            <p className="text-center">Ya se pagó la orden?.</p>
             <form onSubmit={handlePay}>
                 <button type="submit" className="btn btn-primary">
-                    Yes, close order.
+                    Sí, cerrar comanda.
                 </button>
 
                 <ModalButton
@@ -260,22 +264,49 @@ const OrderViewScreen = ({ history, match }) => {
             </div>
         </div>
     );
+//Crear ticket
+
+        const handleTicketCreation = async ({order}) => {
+            let isPrint = window.confirm("Estás seguro de imprimir ticket de comanda?")
+            if(isPrint){
+                await render(createReceipt(order))
+            }
+        }
+    const renderThermalTicketComponent = () => (
+        <div className="card">
+            <div className="card-header bg-info">Imprimir ticket de comanda</div>
+            <div className="card-body">
+                <button
+                    className="btn btn-block"
+                    onClick={() => handleTicketCreation(orderDetails)}
+                >
+                    <ViewBox
+                        title={`CREAR TICKET`}
+                        paragraph={`Click para imprimir ticket`}
+                        icon={"fas fa-hand-holding-usd"}
+                        color={"bg-info"}
+                    />
+                    
+                </button>
+            </div>
+        </div>
+    );
 
     const renderOrderPay = () => (
         <div className="card">
-            <div className="card-header bg-success">Update to Paid</div>
+            <div className="card-header bg-success">Opciones de pago:</div>
             <div className="card-body">
                 <button
                     className="btn btn-block"
                     onClick={() => setModal(true)}
                 >
                     <ViewBox
-                        title={`PAY $${order.total}`}
-                        paragraph={`Click to Pay`}
+                        title={`PAGAR $${order.total}`}
+                        paragraph={`Click para pagar`}
                         icon={"fas fa-hand-holding-usd"}
                         color={"bg-success"}
                     />
-                    <Receipt/>
+                    
                 </button>
             </div>
         </div>
@@ -303,6 +334,12 @@ const OrderViewScreen = ({ history, match }) => {
             {order && !order.isPaid && renderOrderPay()}
         </div>
     );
+
+    const renderTicketButton = () => (
+        <div className="col-12 col-md-3">
+            {order && !order.isPaid && renderThermalTicketComponent()}
+        </div>
+    )
 
     return (
         <>
@@ -343,6 +380,12 @@ const OrderViewScreen = ({ history, match }) => {
                             loading={loading}
                             error={error}
                             render={renderOrderButton}
+                            loader={<BigSpin />}
+                        />
+                        <LoaderHandler
+                            loading={loading}
+                            error={error}
+                            render={renderTicketButton}
                             loader={<BigSpin />}
                         />
                         <LoaderHandler

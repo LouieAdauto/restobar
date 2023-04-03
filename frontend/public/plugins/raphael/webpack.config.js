@@ -20,7 +20,19 @@ module.exports = function (env) {
       libraryTarget: "umd",
       library: "Raphael"
     },
-    
+    module: {
+    rules: [
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' },
+      {test: /\.js$/, use: 'babel-loader' }
+    ],
+    loaders:[
+    {
+        test: /\.js$/,
+        loaders: ["babel-loader"],
+      }
+    ],
+  },
     externals: externals,
     
     plugins: [
