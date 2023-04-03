@@ -7,11 +7,11 @@ const { Op } = require("sequelize");
 //@route    POST /api/products
 //@access   Private/product
 exports.createProduct = asyncHandler(async (req, res) => {
-    const { name, price, stock, categoryId } = req.body;
+    const { earnings, name, price, stock, categoryId } = req.body;
     const category = await Category.findByPk(categoryId);
 
     if (category) {
-        createdProduct = await category.createProduct({ name, price, stock });
+        createdProduct = await category.createProduct({ name, price, stock, earnings });
         res.json(createdProduct);
     } else {
         res.status(404);
@@ -77,7 +77,7 @@ exports.getProduct = asyncHandler(async (req, res) => {
 //@route    PUT /api/products/:id
 //@access   Private/user
 exports.updateProduct = asyncHandler(async (req, res) => {
-    const { name, price, stock, category } = req.body;
+    const { earnings, name, price, stock, category } = req.body;
 
     const product = await Product.findByPk(req.params.id);
 
@@ -86,6 +86,7 @@ exports.updateProduct = asyncHandler(async (req, res) => {
         product.price = price;
         product.stock = stock;
         product.categoryId = category;
+        product.earnings = earnings;
         const updatedProduct = await product.save();
         res.json(updatedProduct);
     } else {

@@ -24,25 +24,30 @@ module.exports = {
         name: 'HAMBRUGUESA CHICA',
         price: 120,
         stock:  50,
-        categoryId: hamburguesas.id
+        categoryId: hamburguesas.id,
+        earnings: 10        
+
       },
       {
         name: 'HAMBRUGUESA GRANDE',
         price: 180,
         stock:  70,
-        categoryId: hamburguesas.id
+        categoryId: hamburguesas.id,
+        earnings: 10        
       },
       {
         name: 'COCA COLA 3LTS',
         price: 180,
         stock:  70,
-        categoryId: gaseosas.id
+        categoryId: gaseosas.id,
+        earnings: 10        
       },
       {
         name: 'COCA COLA 1.5LTS',
         price: 180,
         stock:  70,
-        categoryId: gaseosas.id
+        categoryId: gaseosas.id,
+        earnings: 10        
       }
     ])
 

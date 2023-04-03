@@ -1,6 +1,11 @@
 const {check} = require('express-validator')
 
 exports.productCreateValidator = [
+    check('earnings')
+    .notEmpty()
+    .withMessage('Earnings are required')
+    .isFloat()
+    .withMessage('Earnings must be a number'),
     check('name')
         .notEmpty()
         .withMessage('Name is required')

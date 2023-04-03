@@ -27,6 +27,7 @@ const ProductScreen = ({ history }) => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
+    const [earnings, setEarnings] = useState(0);
     const [category, setCategory] = useState(null);
 
     const [errors, setErrors] = useState({});
@@ -59,6 +60,7 @@ const ProductScreen = ({ history }) => {
             setPrice(0);
             setStock(0);
             setCategory(null);
+            setEarnings(0)
 
             setModalIsOpen(false);
         }
@@ -83,6 +85,9 @@ const ProductScreen = ({ history }) => {
         if (!category) {
             errorsCheck.category = "Category is required";
         }
+        if(!earnings){
+            errorsCheck.earnings = "Earnings is required"
+        }
 
         if (Object.keys(errorsCheck).length > 0) {
             setErrors(errorsCheck);
@@ -92,10 +97,11 @@ const ProductScreen = ({ history }) => {
 
         if (Object.keys(errorsCheck).length === 0) {
             const product = {
-                name: name,
-                price: price,
-                stock: stock,
+                name,
+                price,
+                stock,
                 categoryId: category,
+                earnings
             };
 
             dispatch(createProduct(product));
@@ -128,7 +134,7 @@ const ProductScreen = ({ history }) => {
                 onRequestClose={() => setModalIsOpen(false)}
             >
                 <LoaderHandler loading={createLoading} error={createError} />
-                <h2>Create Form</h2>
+                <h2>New Product</h2>
                 <form onSubmit={handleSubmit}>
                     <Input
                         name={"name"}
@@ -151,6 +157,14 @@ const ProductScreen = ({ history }) => {
                         setData={setStock}
                         errors={errors}
                     />
+                    <Input
+                        name={"earnings"}
+                        type={"number"}
+                        data={earnings}
+                        setData={setEarnings}
+                        errors={errors}
+                    />
+                    <b>Category</b>
                     {renderCategoriesSelect()}
                     {errors.category && (
                         <Message message={errors.category} color={"warning"} />
@@ -177,6 +191,7 @@ const ProductScreen = ({ history }) => {
                     <th>Name</th>
                     <th>Price</th>
                     <th>Stock</th>
+                    <th>Earnings</th>
                     <th className="d-none d-sm-table-cell">Created At</th>
                     <th className="d-none d-sm-table-cell">Category</th>
                     <th></th>
@@ -189,6 +204,7 @@ const ProductScreen = ({ history }) => {
                         <td>{product.name}</td>
                         <td>{product.price}</td>
                         <td>{product.stock}</td>
+                        <td>{product.earnings}</td>
                         <td className="d-none d-sm-table-cell">
                             {product.createdAt.slice(0, 10)}
                         </td>

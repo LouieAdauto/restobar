@@ -21,6 +21,7 @@ import {
 
 /* Styles */
 import { modalStyles } from "../../utils/styles";
+import Receipt from "../../components/receipt/Receipt";
 
 const OrderViewScreen = ({ history, match }) => {
     const orderId = parseInt(match.params.id);
@@ -274,6 +275,7 @@ const OrderViewScreen = ({ history, match }) => {
                         icon={"fas fa-hand-holding-usd"}
                         color={"bg-success"}
                     />
+                    <Receipt/>
                 </button>
             </div>
         </div>

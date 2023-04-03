@@ -45,7 +45,8 @@ const OrderScreen = ({ history }) => {
                     <th className="d-none d-sm-table-cell">Table</th>
                     <th>Paid</th>
                     <th>Total</th>
-                    <th></th>
+                    <th>Pending</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +80,11 @@ const OrderScreen = ({ history }) => {
                             <span className={"badge bg-success"}>
                                 ${order.total}
                             </span>
+                        </td>
+                        <td>
+                            <h4 className="text-warning">
+                                <i className="fas fa-exclamation-triangle"></i>
+                            </h4>
                         </td>
                         <td>
                             <Link

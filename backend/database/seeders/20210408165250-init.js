@@ -13,7 +13,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert('Categories', [
       {
-        name: 'CERVEZAS'
+        name: 'REFRESCOS'
       },
       {
         name: 'GASEOSAS'

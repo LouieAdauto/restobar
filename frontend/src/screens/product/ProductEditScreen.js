@@ -29,6 +29,7 @@ const ProductEditScreen = ({ history, match }) => {
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
     const [category, setCategory] = useState("");
+    const [earnings, setEarnings] = useState(0)
 
     const [errors, setErrors] = useState({});
 
@@ -150,7 +151,14 @@ const ProductEditScreen = ({ history, match }) => {
                 setData={setStock}
                 errors={errors}
             />
-
+            <Input
+                name={"earnings"}
+                type={"number"}
+                data={earnings}
+                setData={setEarnings}
+                errors={errors}
+            />
+            <b>Category</b>
             {renderCategoriesSelect()}
             {errors.category && (
                 <Message message={errors.category} color={"warning"} />
@@ -176,7 +184,7 @@ const ProductEditScreen = ({ history, match }) => {
                         <div className="col-12 col-md-6">
                             <div className="card">
                                 <div className="card-header">
-                                    <h3 className="card-title">Edit Product</h3>
+                                    <h2 className="card-title">Edit Product</h2>
                                 </div>
                                 {/* /.card-header */}
                                 <div className="card-body">

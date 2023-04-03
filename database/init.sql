@@ -133,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
   `price` double NOT NULL,
   `stock` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
+  `earnings` double NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -143,11 +144,11 @@ CREATE TABLE IF NOT EXISTS `Products` (
 -- Volcado de datos para la tabla `Products`
 --
 
-INSERT INTO `Products` (`id`, `name`, `price`, `stock`, `categoryId`, `createdAt`, `updatedAt`) VALUES
-(1, 'HAMBRUGUESA CHICA', 120, 50, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(2, 'HAMBRUGUESA GRANDE', 180, 70, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(3, 'COCA COLA 3LTS', 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(4, 'COCA COLA 1.5LTS', 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51');
+INSERT INTO `Products` (`id`, `name`, `price`, `stock`, `categoryId`, `earnings`, `createdAt`, `updatedAt`) VALUES
+(1, 'HAMBRUGUESA CHICA', 120, 50, 4, 90, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(2, 'HAMBRUGUESA GRANDE', 180, 70, 4, 90, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(3, 'COCA COLA 3LTS', 180, 70, 2, 90, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(4, 'COCA COLA 1.5LTS', 180, 70, 2, 90, '2021-08-23 05:50:51', '2021-08-23 05:50:51');
 
 -- --------------------------------------------------------
 
